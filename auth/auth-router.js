@@ -2,7 +2,6 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets.js');
-const authenticate = require('./authenticate-middleware.js');
 const db = require('./../database/dbConfig.js');
 
 router.post('/register', (req, res) => {
@@ -72,6 +71,5 @@ function genToken(user) {
 
   return token;
 }
-
 
 module.exports = router;
