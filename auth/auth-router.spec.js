@@ -28,9 +28,26 @@ describe('POST /register', () => {
         done();
       });
   });
+
+  beforeEach(async () => {
+    await db('users').truncate();
+  });
+
 });
 
 describe('POST /login', () => {
+  it('should return the newly registered user', (done) => {
+    request(server)
+      .post('/api/auth/register')
+      .send({ username: 'seongck', password: 'password' }) 
+      .set('Accept', 'application/json')
+      .expect(201)
+      .end((err, res) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
   it('should return a 200 status', (done) => {
     request(server)
       .post('/api/auth/login')
